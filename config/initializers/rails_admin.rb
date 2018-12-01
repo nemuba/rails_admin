@@ -1,4 +1,11 @@
 RailsAdmin.config do |config|
+  config.main_app_name = ["Representantes Comerciais", ""]
+
+  config.navigation_static_links = {
+    'OneBitCode' => 'https://onebitcode.com'
+  }
+
+  config.navigation_static_label = "Lins Úteis"
 
   ### Popular gems integration
 
@@ -23,7 +30,12 @@ RailsAdmin.config do |config|
   ## To disable Gravatar integration in Navigation Bar set to false
   # config.show_gravatar = true
 
+
   config.model Sale do
+    navigation_icon 'fa fa-money'
+    parent User
+    weight -2
+
   create do
     field  :client
     field  :sale_date
@@ -54,6 +66,7 @@ RailsAdmin.config do |config|
 end
 
 config.model Client do
+  parent User
   create do
     field  :name
     field  :company_name
@@ -124,6 +137,13 @@ config.model ProductQuantity do
   end
 end
 
+config.model Discount do
+  parent Product
+end
+config.model Comission do
+  parent User
+  weight -1
+end
   config.actions do
     dashboard                     # mandatory
     index                         # mandatory
